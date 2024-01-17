@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Table Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        @media screen and (max-width: 600px) {
+            th, td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            th, td {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Shipping Method</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Extra Information</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+                <th>Is Shipped</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                echo "<td>{$row['order_id']}</td>";
+                echo "<td>{$row['shipping_method']}</td>";
+                echo "<td>{$row['name']}</td>";
+                echo "<td>{$row['phone']}</td>";
+                echo "<td>{$row['email']}</td>";
+                echo "<td>{$row['address']}</td>";
+                echo "<td>{$row['extra_information']}</td>";
+                echo "<td>{$row['p_name']}</td>";
+                echo "<td>{$row['quantity']}</td>";
+                echo "<td>{$row['total_price']}</td>";
+                echo "<td>{$row['order_date']}</td>";
+                echo "<td>{$row['is_shipped']}</td>";
+                echo "<td>";
+                // Display a button to mark item as shipped
+                if (!$row['is_shipped']) {
+                    echo "<button type='submit' name='mark_shipped' value='{$row['item_id']}'>Mark Shipped</button>";
+                } else {
+                    echo "Shipped";
+                }
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>
